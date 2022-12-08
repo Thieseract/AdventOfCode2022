@@ -41,7 +41,7 @@ function solvePuzzle($rations){
   echo 'The Elf with the most total calories is carrying ' . $mostCalories . PHP_EOL;
   echo 'The top 3 elves are carrying a total of ' . $totalCaloriesTop3;
 
-  return $totalCaloriesTop3;
+  return;
 }
 
 solvePuzzle($rations);
