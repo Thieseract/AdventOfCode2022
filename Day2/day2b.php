@@ -3,28 +3,29 @@
 //provides variables guide (main puzzle data) and guideTest (simplified data for testing)
 require('input.php');
 
-function evaluateTurn($opponentMove, $selfMove){
+function evaluateTurn($opponentMove, $result){
 
+  // each opponent move mapped to the points result for the corresponding action
   $comparisons = [
-    'X' => ['A' => 3, 'B' => 0, 'C' => 6],
-    'Y' => ['A' => 6, 'B' => 3, 'C' => 0],
-    'Z' => ['A' => 0, 'B' => 6, 'C' => 3],
+    'A' => ['Z' => 2, 'X' => 3, 'Y' => 1],
+    'B' => ['Z' => 3, 'X' => 1, 'Y' => 2],
+    'C' => ['Z' => 1, 'X' => 2, 'Y' => 3],
   ];
 
-  return $comparisons[$selfMove][$opponentMove];
+  return $comparisons[$opponentMove][$result];
 }
 
 function computeOutcomeArray(){
 
   $opponentMoves = ['A','B','C'];
-  $selfMoves     = ['X','Y','Z'];
-  $selfPoints    = ['X' => 1,'Y' => 2,'Z' => 3];
+  $results     = ['X','Y','Z'];
+  $selfPoints    = ['X' => 0,'Y' => 3,'Z' => 6];
   $possibilities = [];
 
   foreach($opponentMoves as $op){
-    foreach($selfMoves as $self){
-      $key = "$op $self";
-      $value = evaluateTurn($op, $self) + $selfPoints[$self];
+    foreach($results as $res){
+      $key = "$op $res";
+      $value = evaluateTurn($op, $res) + $selfPoints[$res];
       $possibilities[$key] = [$value];
     }
   }
